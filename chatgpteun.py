@@ -37,7 +37,7 @@ if uploaded_file is not None:
 
         try:
             response = client.chat.completions.create(
-                model="gpt-4",
+                model="gpt-3.5-turbo",
                 messages=[
                     {"role": "system", "content": "Je bent een behulpzame PDF-assistent genaamd ChatGPTeun."},
                     {"role": "user", "content": prompt}
