@@ -1,8 +1,9 @@
+
 import streamlit as st
 import pdfplumber
-import openai
+from openai import OpenAI
 
-openai.api_key = st.secrets["OPENAI_API_KEY"]
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 st.set_page_config(page_title="ChatGPTeun", layout="wide")
 st.markdown(
@@ -35,7 +36,7 @@ if uploaded_file is not None:
         prompt = f"Het volgende document is geüpload:\n\n{full_text[:3000]}\n\nVraag: {question}\nAntwoord:"
 
         try:
-            response = openai.ChatCompletion.create(
+            response = client.chat.completions.create(
                 model="gpt-4",
                 messages=[
                     {"role": "system", "content": "Je bent een behulpzame PDF-assistent genaamd ChatGPTeun."},
@@ -44,7 +45,7 @@ if uploaded_file is not None:
                 max_tokens=500,
                 temperature=0.3,
             )
-            answer = response.choices[0].message["content"].strip()
+            answer = response.choices[0].message.content.strip()
             st.session_state.history.append((question, answer))
         except Exception as e:
             st.error(f"Fout bij het ophalen van antwoord: {e}")
