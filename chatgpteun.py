@@ -6,7 +6,7 @@ openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 st.set_page_config(page_title="ChatGPTeun", layout="wide")
 st.markdown(
-    "<h1 style='text-align: center; color: #333;'>ChatGPTeun – PDF Assistent</h1>",
+    "<h1 style='text-align: center; color: white;'>ChatGPTeun – PDF Assistent</h1>",
     unsafe_allow_html=True
 )
 
